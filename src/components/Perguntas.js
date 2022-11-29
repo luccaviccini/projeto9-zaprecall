@@ -18,7 +18,13 @@ function Pergunta(props) {
   return (
     <PerguntaFechada>
       <p> Pergunta {props.numero}</p>
-      <button onClick={() => console.log("Clicou na pergunta: ", props.numero)}><img src={setaPlay}></img></button>
+      <input
+        onClick={() => console.log("Clicou na pergunta: ", props.numero)}
+        type="image"
+        src={setaPlay}
+        alt="setaPlay"
+      />
+      
     </PerguntaFechada>
   );
 }
