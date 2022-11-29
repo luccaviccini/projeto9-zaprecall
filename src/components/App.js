@@ -1,16 +1,14 @@
 import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
+import Perguntas from "./Perguntas";
 
 export default function App() {
   return (    
   <ScreenContainer>
-    <Header>
-
-    </Header>
-    <Footer>
-      
-    </Footer>
+    <Header></Header>
+    <Perguntas></Perguntas>
+    <Footer></Footer>
 
 
   </ScreenContainer>

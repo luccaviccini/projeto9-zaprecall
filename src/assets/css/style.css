@@ -1,20 +1,5 @@
 
-.footer-concluidos {
-  width: 100%;
-  min-height: 50px;
-  background-color: #FFFFFF;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Recursive';
-  font-weight: 400;
-  font-size: 18px;
-  color: #333333;
-  padding: 10px;
-}
+
 
 .footer-concluidos > .container-botoes {
   display: flex;
@@ -48,27 +33,7 @@
   padding:5px;
 }
 
-.pergunta-fechada {
-  width: 300px;
-  height: 35px;
-  background-color: #FFFFFF;
-  margin: 12px;
-  padding: 15px;
-  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.pergunta-fechada > p {
-  font-family: 'Recursive';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: #333333;
-}
 
 .pergunta-aberta {
   width: 300px;
