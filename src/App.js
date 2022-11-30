@@ -7,8 +7,10 @@ import { useState } from "react";
 export default function App() {
   const [perguntaAberta, setperguntaAberta] = useState([]);
   const [verResposta, setverResposta] = useState([]);
+  const [respondido, setrespondido] = useState([])
   console.log("perguntaAberta", perguntaAberta);
   console.log("verResposta", verResposta);
+  console.log("respondido", respondido);
 
   return (
     <ScreenContainer>
@@ -17,7 +19,9 @@ export default function App() {
         perguntaAberta={perguntaAberta}
         setperguntaAberta={setperguntaAberta}
         verResposta={verResposta}
-        setverResposta={setverResposta}>
+        setverResposta={setverResposta}
+        respondido = {respondido}
+        setrespondido = {setrespondido}>        
 
         </Perguntas>
       <Footer></Footer>

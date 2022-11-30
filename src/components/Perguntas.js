@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import setaPlay from "../assets/img/seta_play.png";
+import iconeErro from "../assets/img/icone_erro.png";
+import iconeQuase from "../assets/img/icone_quase.png";
+import iconeCerto from "../assets/img/icone_certo.png";
+import { useState } from "react";
 import setaVirar from "../assets/img/seta_virar.png";
 import Deck from "./Deck";
 
@@ -26,6 +30,8 @@ function Pergunta({
   setperguntaAberta,
   verResposta,
   setverResposta,
+  respondido,
+  setrespondido,
 }) {
   function abrirPergunta() {
     // checando se a pergunda já foi aberta
@@ -42,35 +48,70 @@ function Pergunta({
       ? setverResposta(verResposta.filter((x) => x !== id)) // se tiver o id tirar
       : setverResposta([...verResposta, id]); // se nao tiver adicionar
   }
+  const [respondida, setRespondida] = useState(false);
+  function handleRespondido(id, resposta) {
+    // setando a pergunta com id e resposta
+    // checando se a pergunta já foi respondida
 
-  if (!perguntaAberta.includes(id)) {
+    if (!respondido.some((x) => x.id === id)) {
+      setrespondido([...respondido, { id, resposta }]);
+      setRespondida(true);
+    }
+  }
+
+  function checkResposta() {
+    if (respondido.some((x) => x.id === id && x.resposta === "errada")) {
+      return { icone: iconeErro, color: "#FF3030" };
+    } else if (respondido.some((x) => x.id === id && x.resposta === "quase")) {
+      return { icone: iconeQuase, color: "#FF922E" };
+    } else if (respondido.some((x) => x.id === id && x.resposta === "certa")) {
+      return { icone: iconeCerto, color: "#2FBE34" };
+    } else {
+      return { icone: setaPlay, color: "#333333" };
+    }
+  }
+
+  if (!perguntaAberta.includes(id) || respondida) {
+    console.log(id);
     return (
-      <PerguntaFechada perguntaAberta={perguntaAberta} id={id}>
+      <PerguntaFechada
+        perguntaAberta={perguntaAberta}
+        id={id}
+        respondida={respondida}
+        respondido={respondido}
+        checkResposta = {checkResposta}>
         <p> Pergunta {id}</p>
         <input
           onClick={abrirPergunta}
           type="image"
-          src={setaPlay}
+          src={checkResposta().icone}
           alt="setaPlay"
         />
       </PerguntaFechada>
     );
-  } else if(!verResposta.includes(id)){
+  } else if (!verResposta.includes(id)) {
     return (
       <PerguntaAberta>
         <p> {question}</p>
-        <img onClick={handleVerResposta} src={setaVirar}></img>
+        <img
+          onClick={handleVerResposta}
+          src={setaVirar}
+          alt="botaoSetaVirar"></img>
       </PerguntaAberta>
     );
-  }
-  else {
+  } else {
     return (
       <PerguntaAberta>
         <p> {answer}</p>
         <ContainerBotoes>
-          <button>Não Lembrei!</button>
-          <button> Quase não Lembrei</button>
-          <button>Zap</button>
+          <button onClick={() => handleRespondido(id, "errada")}>
+            Não Lembrei!
+          </button>
+          <button onClick={() => handleRespondido(id, "quase")}>
+            {" "}
+            Quase não Lembrei
+          </button>
+          <button onClick={() => handleRespondido(id, "certa")}>Zap</button>
         </ContainerBotoes>
       </PerguntaAberta>
     );
@@ -88,6 +129,8 @@ const PerguntaFechada = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-decoration: ${(props) => (props.respondida ? "line-through" : "none")};
+  color: ${(props) =>props.checkResposta().color};
 
   p {
     font-family: "Recursive";
@@ -95,11 +138,11 @@ const PerguntaFechada = styled.li`
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    color: #333333;
   }
 
   img {
     width: 20px;
+    
   }
 
   button {
