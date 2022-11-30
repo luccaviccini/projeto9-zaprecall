@@ -12,6 +12,7 @@ export default function Perguntas(props) {
     <ul>
       {Deck.map((card) => (
         <Pergunta
+          data-test="flashcard"
           key={card.id}
           id={card.id}
           question={card.question}
@@ -61,13 +62,13 @@ function Pergunta({
   function checkResposta() {
     // checando o tipo de resposta
     if (respondido.some((x) => x.id === id && x.resposta === "erro")) {
-      return { icone: iconeErro, color: "#FF3030" };
+      return { datatest:"no-icon", icone: iconeErro, color: "#FF3030" };
     } else if (respondido.some((x) => x.id === id && x.resposta === "quase")) {
-      return { icone: iconeQuase, color: "#FF922E" };
+      return { datatest: "partial-icon", icone: iconeQuase, color: "#FF922E" };
     } else if (respondido.some((x) => x.id === id && x.resposta === "certa")) {
-      return { icone: iconeCerto, color: "#2FBE34" };
+      return { datatest: "zap-icon", icone: iconeCerto, color: "#2FBE34" };
     } else {
-      return { icone: setaPlay, color: "#333333" };
+      return { datatest: "play-btn", icone: setaPlay, color: "#333333" };
     }
   }
 
@@ -81,9 +82,10 @@ function Pergunta({
         id={id}
         respondida={respondida}
         respondido={respondido}
-        checkResposta = {checkResposta}>
-        <p> Pergunta {id}</p>
+        checkResposta={checkResposta}>
+        <p data-test="flashcard-text"> Pergunta {id}</p>
         <input
+          data-test={checkResposta().datatest}
           onClick={abrirPergunta}
           type="image"
           src={checkResposta().icone}
@@ -94,8 +96,9 @@ function Pergunta({
   } else if (!verResposta.includes(id)) {
     return (
       <PerguntaAberta>
-        <p> {question}</p>
+        <p data-test="flashcard-text"> {question}</p>
         <img
+          data-test="turn-btn"
           onClick={handleVerResposta}
           src={setaVirar}
           alt="botaoSetaVirar"></img>
@@ -104,16 +107,24 @@ function Pergunta({
   } else {
     return (
       <PerguntaAberta>
-        <p> {answer}</p>
+        <p data-test="flashcard-text"> {answer}</p>
         <ContainerBotoes>
-          <button onClick={() => handleRespondido(id, "erro")}>
+          <button
+            data-test="no-btn"
+            onClick={() => handleRespondido(id, "erro")}>
             Não Lembrei!
           </button>
-          <button onClick={() => handleRespondido(id, "quase")}>
+          <button
+            data-test="partial-btn"
+            onClick={() => handleRespondido(id, "quase")}>
             {" "}
             Quase não Lembrei
           </button>
-          <button onClick={() => handleRespondido(id, "certa")}>Zap</button>
+          <button
+            data-test="zap-btn"
+            onClick={() => handleRespondido(id, "certa")}>
+            Zap
+          </button>
         </ContainerBotoes>
       </PerguntaAberta>
     );

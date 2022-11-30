@@ -7,17 +7,32 @@ import sad from "../assets/img/sad.png";
 
 export default function Footer({ respondido }) {
   return (
-    <FooterConcluidos>
+    <FooterConcluidos data-test="footer">
       <Resultado respondido={respondido}></Resultado>
       {respondido.length}/8 Concluídos
       <ContainerBotoes>
         {respondido.map((e) =>
           e.resposta === "certa" ? (
-            <img key={e.id} src={certa} alt="icone certo" />
+            <img
+              data-test="zap-icon"
+              key={e.id}
+              src={certa}
+              alt="icone certo"
+            />
           ) : e.resposta === "quase" ? (
-            <img key={e.id} src={quase} alt="icone quase" />
+            <img
+              data-test="partial-icon"
+              key={e.id}
+              src={quase}
+              alt="icone quase"
+            />
           ) : (
-            <img key={e.id} src={errada} alt="icone errada" />
+            <img
+              data-test="no-icon"
+              key={e.id}
+              src={errada}
+              alt="icone errada"
+            />
           )
         )}
       </ContainerBotoes>
@@ -34,17 +49,17 @@ function Resultado(props) {
   if (todasRespondidas) {
     if (todasCertas) {
       return (
-        <ContainerCongratulacoes>
-          <div>
+        <ContainerCongratulacoes data-test="finish-text">
+          <span>
             <img src={party} alt="sad"></img>
             Parabéns!
-          </div>
+          </span>
           <p>Você não esqueceu de nenhum flashcard!</p>
         </ContainerCongratulacoes>
       );
     } else {
       return (
-        <ContainerCongratulacoes>
+        <ContainerCongratulacoes data-test="finish-text">
           <span>
             <img src={sad} alt="sad"></img>
             Putz...
