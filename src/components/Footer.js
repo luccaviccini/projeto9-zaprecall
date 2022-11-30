@@ -1,10 +1,59 @@
 import styled from "styled-components";
+import errada from "../assets/img/icone_erro.png";
+import quase from "../assets/img/icone_quase.png";
+import certa from "../assets/img/icone_certo.png";
+import party from "../assets/img/party.png";
+import sad from "../assets/img/sad.png";
 
+export default function Footer({ respondido }) {
+  return (
+    <FooterConcluidos>
+      <Resultado respondido={respondido}></Resultado>
+      {respondido.length}/8 Concluídos
+      <ContainerBotoes>
+        {respondido.map((e) =>
+          e.resposta === "certa" ? (
+            <img key={e.id} src={certa} alt="icone certo" />
+          ) : e.resposta === "quase" ? (
+            <img key={e.id} src={quase} alt="icone quase" />
+          ) : (
+            <img key={e.id} src={errada} alt="icone errada" />
+          )
+        )}
+      </ContainerBotoes>
+    </FooterConcluidos>
+  );
+}
 
-export default function Footer() {
-  return <FooterConcluidos>
-    0/8 Concluídos
-  </FooterConcluidos>;
+function Resultado(props) {
+  // check se todas as respostas estao certas
+  const todasRespondidas = props.respondido.length === 8;
+  const todasCertas = props.respondido.every((e) => e.resposta === "certa");
+
+  // se todas estao certas
+  if (todasRespondidas) {
+    if (todasCertas) {
+      return (
+        <ContainerCongratulacoes>
+          <div>
+            <img src={party} alt="sad"></img>
+            Parabéns!
+          </div>
+          <p>Você não esqueceu de nenhum flashcard!</p>
+        </ContainerCongratulacoes>
+      );
+    } else {
+      return (
+        <ContainerCongratulacoes>
+          <span>
+            <img src={sad} alt="sad"></img>
+            Putz...
+          </span>
+          <p>Ainda faltam alguns... Mas não desanime!</p>
+        </ContainerCongratulacoes>
+      );
+    }
+  }
 }
 
 const FooterConcluidos = styled.div`
@@ -22,8 +71,31 @@ const FooterConcluidos = styled.div`
   font-size: 18px;
   color: #333333;
   padding: 10px;
-
-
+  gap: 10px;
+ 
+  
 `;
 
+const ContainerBotoes = styled.div`
+  display: flex;
+  width: 80%;
+  gap: 5px;
+  justify-content: center;
+  
+  img {
+    width: 23px;
+  }
+`;
 
+const ContainerCongratulacoes = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  img{
+    box-sizing: border-box;
+    padding-right: 13px;
+  }
+  `

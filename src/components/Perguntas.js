@@ -48,11 +48,10 @@ function Pergunta({
       ? setverResposta(verResposta.filter((x) => x !== id)) // se tiver o id tirar
       : setverResposta([...verResposta, id]); // se nao tiver adicionar
   }
+
   const [respondida, setRespondida] = useState(false);
   function handleRespondido(id, resposta) {
-    // setando a pergunta com id e resposta
-    // checando se a pergunta já foi respondida
-
+    // se ainda nao estiver respondida adicionar no arr respondido e seta 
     if (!respondido.some((x) => x.id === id)) {
       setrespondido([...respondido, { id, resposta }]);
       setRespondida(true);
@@ -60,7 +59,8 @@ function Pergunta({
   }
 
   function checkResposta() {
-    if (respondido.some((x) => x.id === id && x.resposta === "errada")) {
+    // checando o tipo de resposta
+    if (respondido.some((x) => x.id === id && x.resposta === "erro")) {
       return { icone: iconeErro, color: "#FF3030" };
     } else if (respondido.some((x) => x.id === id && x.resposta === "quase")) {
       return { icone: iconeQuase, color: "#FF922E" };
@@ -71,6 +71,8 @@ function Pergunta({
     }
   }
 
+
+  // returns dependendo da condição
   if (!perguntaAberta.includes(id) || respondida) {
     console.log(id);
     return (
@@ -104,7 +106,7 @@ function Pergunta({
       <PerguntaAberta>
         <p> {answer}</p>
         <ContainerBotoes>
-          <button onClick={() => handleRespondido(id, "errada")}>
+          <button onClick={() => handleRespondido(id, "erro")}>
             Não Lembrei!
           </button>
           <button onClick={() => handleRespondido(id, "quase")}>

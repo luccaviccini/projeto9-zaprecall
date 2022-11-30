@@ -20,11 +20,9 @@ export default function App() {
         setperguntaAberta={setperguntaAberta}
         verResposta={verResposta}
         setverResposta={setverResposta}
-        respondido = {respondido}
-        setrespondido = {setrespondido}>        
-
-        </Perguntas>
-      <Footer></Footer>
+        respondido={respondido}
+        setrespondido={setrespondido}></Perguntas>
+      <Footer respondido={respondido}></Footer>
     </ScreenContainer>
   );
 }
