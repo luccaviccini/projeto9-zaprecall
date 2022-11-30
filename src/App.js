@@ -33,7 +33,9 @@ export default function App() {
       <TelaIniciarContainer>
         <img src={logo} alt="logo"></img>
         <h1>ZapRecall</h1>
-        <button onClick={setIniciar}>Iniciar Recall!</button>
+        <button data-test="start-btn" onClick={setIniciar}>
+          Iniciar Recall!
+        </button>
       </TelaIniciarContainer>
     );
   }
