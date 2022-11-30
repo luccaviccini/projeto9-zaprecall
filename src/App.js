@@ -5,6 +5,8 @@ import Perguntas from "./components/Perguntas";
 import logo from "./assets/img/logo.png";
 import { useState } from "react";
 
+import GlobalStyle from "./theme/GlobalStyles";
+
 export default function App() {
   const [perguntaAberta, setperguntaAberta] = useState([]);
   const [verResposta, setverResposta] = useState([]);
@@ -16,27 +18,33 @@ export default function App() {
 
   if (iniciar) {
     return (
-      <ScreenContainer>
-        <Header></Header>
-        <Perguntas
-          perguntaAberta={perguntaAberta}
-          setperguntaAberta={setperguntaAberta}
-          verResposta={verResposta}
-          setverResposta={setverResposta}
-          respondido={respondido}
-          setrespondido={setrespondido}></Perguntas>
-        <Footer respondido={respondido}></Footer>
-      </ScreenContainer>
+      <>
+        <GlobalStyle />
+        <ScreenContainer>
+          <Header></Header>
+          <Perguntas
+            perguntaAberta={perguntaAberta}
+            setperguntaAberta={setperguntaAberta}
+            verResposta={verResposta}
+            setverResposta={setverResposta}
+            respondido={respondido}
+            setrespondido={setrespondido}></Perguntas>
+          <Footer respondido={respondido}></Footer>
+        </ScreenContainer>
+      </>
     );
   } else {
     return (
-      <TelaIniciarContainer>
-        <img src={logo} alt="logo"></img>
-        <h1>ZapRecall</h1>
-        <button data-test="start-btn" onClick={setIniciar}>
-          Iniciar Recall!
-        </button>
-      </TelaIniciarContainer>
+      <>
+        <GlobalStyle />
+        <TelaIniciarContainer>
+          <img src={logo} alt="logo"></img>
+          <h1>ZapRecall</h1>
+          <button data-test="start-btn" onClick={setIniciar}>
+            Iniciar Recall!
+          </button>
+        </TelaIniciarContainer>
+      </>
     );
   }
 }
@@ -99,3 +107,4 @@ const TelaIniciarContainer = styled.div`
     opacity: 0.9;
   }
 `;
+
