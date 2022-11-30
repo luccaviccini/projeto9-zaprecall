@@ -1,4 +1,4 @@
-const Deck = [
+const deck = [
   {
     id: 1,
     question: "O que é JSX?",
@@ -6,7 +6,7 @@ const Deck = [
   },
   {
     id: 2,
-    question: "O React é __",
+    question: "O que é React?",
     answer: "Uma biblioteca JavaScript para construção de interfaces",
   },
   {
@@ -38,4 +38,4 @@ const Deck = [
   },
 ];
 
-export default Deck;
+export default deck;

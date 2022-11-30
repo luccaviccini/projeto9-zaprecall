@@ -1,6 +1,4 @@
 
-
-
 .footer-concluidos > .container-botoes {
   display: flex;
   width: 80%;
@@ -55,8 +53,3 @@
   justify-content: space-between;
 }
 
-.pergunta-aberta > img{
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
