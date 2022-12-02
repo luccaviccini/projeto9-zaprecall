@@ -11,8 +11,7 @@ export default function Perguntas(props) {
   return (
     <ul>
       {Deck.map((card) => (
-        <Pergunta
-          data-test="flashcard"
+        <Pergunta          
           key={card.id}
           id={card.id}
           question={card.question}
@@ -33,7 +32,8 @@ function Pergunta({
   setverResposta,
   respondido,
   setrespondido,
-}) {
+          }) 
+  {
   function abrirPergunta() {
     // checando se a pergunda já foi aberta
     perguntaAberta.includes(id)
@@ -78,6 +78,7 @@ function Pergunta({
     console.log(id);
     return (
       <PerguntaFechada
+        data-test="flashcard"
         perguntaAberta={perguntaAberta}
         id={id}
         respondida={respondida}
@@ -95,7 +96,7 @@ function Pergunta({
     );
   } else if (!verResposta.includes(id)) {
     return (
-      <PerguntaAberta>
+      <PerguntaAberta data-test="flashcard">
         <p data-test="flashcard-text"> {question}</p>
         <img
           data-test="turn-btn"
@@ -106,7 +107,7 @@ function Pergunta({
     );
   } else {
     return (
-      <PerguntaAberta>
+      <PerguntaAberta data-test="flashcard">
         <p data-test="flashcard-text"> {answer}</p>
         <ContainerBotoes>
           <button
